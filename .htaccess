@@ -1,0 +1,11 @@
+ErrorDocument 404 "<html><head><title>404</title></head><body style='background-color:#000;color:#fff;'><div style='text-align:center;font-size:4.0em;'><br/><br/><b>Error 404: not found.</b></div></body></html>"
+
+ServerSignature	Off
+
+
+Options -MultiViews -Indexes
+
+RewriteEngine on
+
+RewriteRule ^index\.php - [L]
+RewriteRule (.*) ./index.php/$1 [L]

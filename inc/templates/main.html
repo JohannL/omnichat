@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name=viewport content="width=device-width, initial-scale=1.0">
+		<title>{title}</title>
+		<link rel="stylesheet" href="{head link stylesheet}" type="text/css">
+	</head>
+	<body>
+		<table id="chat_and_profiles">
+			<tr>
+				<td id="chat">
+					<h2>Chat</h2>
+					<!-- empfangene chats -->
+					<div id="chat_log"></div>
+					<!-- zu sendende chats -->
+					<textarea id="chat_input"></textarea><br>
+					<input type="button" onclick="OC.send_chat()" value="send">
+					<input type="button" onclick="OC.clear_chat()" value="clear chat">
+				</td>
+				<td id="profiles">
+					 <!-- liste der browserprofile -->
+					 <h2>Profiles</h2>
+					 {profiles}
+				</td>
+			</tr>
+		<table>
+	</body>
+	<!-- das script muss am ende stehen, da es auf DOM-Elemente der Seite zugreift -->
+	<script src="{head link javascript}"></script>
+</html>
+# profile #
+<div class=profile id="profile_{profile_key}" onclick="OC.select_profile('{profile_key}')">
+	{profile_key}
+</div>
+# /profile #
