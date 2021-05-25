@@ -23,6 +23,13 @@ function rand_id()
 	return (Math.random() + 10000000000).toString(36).replace(/[^a-z]+/g, '').substr(6, 20)
 }
 
+Omnichat.prototype.reset_profile = function()
+{
+	store.setItem('OC_profile_key', '');
+	store.setItem('OC_profile_id', 0);
+	window.location.reload(true);
+}
+
 Omnichat.prototype.init_main = function()
 {
 	console.log('OC init main');
@@ -99,7 +106,6 @@ Omnichat.prototype.send_chat = function()
 
 Omnichat.prototype.add_to_chatlog = function(peer_key, chat)
 {
-	console.log(`add_to_chatlog = function(${peer_key}, ${chat}`);
 	if (this.chat_logs[peer_key] == undefined)
 	{
 		console.log(`add_to_chatlog this.chat_logs[${peer_key}] == undefined`);
@@ -107,9 +113,8 @@ Omnichat.prototype.add_to_chatlog = function(peer_key, chat)
 	}
 	console.log(this.chat_logs, peer_key);
 	let
-		chat_log = this.chat_logs[peer_key],
 		formatted_chat = '<div class=entry><b>'+peer_key+'</b>: '+chat+'</div>';
-	chat_log.push[formatted_chat];
+	this.chat_logs[peer_key] += formatted_chat;
 	if (this.selected_peer === peer_key)
 	{
 		this.add_to_chat(formatted_chat)

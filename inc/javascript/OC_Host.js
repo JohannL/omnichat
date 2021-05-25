@@ -32,8 +32,8 @@ Omnichat_Host.prototype.init = function()
 			console.log(`Connection opened from {${connection.peer}}`);
 			// receive data
 			connection.on('data', function(data) {
-				that.receive_data(connection.peer, data);
 				console.log('Received data from ' + connection.peer, data);
+				that.receive_data(connection.peer, data);
 			});
 		});
 	});
