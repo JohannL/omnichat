@@ -37,7 +37,7 @@ Omnichat.prototype.init_main = function()
 	store = window.localStorage;
 	if (store.getItem('OC_chat_logs'))
 	{
-		// this.chat_logs = store.getItem('OC_chat_logs');
+		this.chat_logs = JSON.parse(store.getItem('OC_chat_logs'));
 	}
 	if (store.getItem('OC_profile_id'))
 	{
@@ -130,7 +130,7 @@ Omnichat.prototype.add_to_chatlog = function(peer_key, chat)
 	{
 		this.add_to_chat(formatted_chat)
 	}
-	store.setItem('OC_chat_logs', this.chat_logs);
+	store.setItem('OC_chat_logs', JSON.stringify(this.chat_logs));
 }
 
 Omnichat.prototype.add_to_chat = function(formatted_chat)
@@ -148,7 +148,7 @@ Omnichat.prototype.clear_chat = function()
 		this.chat_logs[this.selected_peer] = [];
 	}
 	this.el_chat_log.innerHTML = '';
-	store.setItem('OC_chat_logs', this.chat_logs);
+	store.setItem('OC_chat_logs', JSON.stringify(this.chat_logs));
 }
 
 Omnichat.prototype.refresh_chat = function(peer_key)
