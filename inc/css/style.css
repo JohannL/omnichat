@@ -76,18 +76,42 @@ h2
 	background: 	#eee;
 	cursor: 		pointer;
 	padding:		0.2em 0.5em;
-	margin:				0;
-	padding:			0.25em 0.5em;
-	border-radius:		0.15em;
-	background:			hsla(0, 0%, 96%, 1);
-	box-shadow:			1px 1px 3px hsla(0, 0%, 0%, 0.2);
-	border-top:			1px solid hsla(0, 0%, 98%, 1);
-	border-left:		4px solid hsla(0, 0%, 98%, 1);
-	border-right:		1px solid hsla(0, 0%, 94%, 1);
-	border-bottom:		1px solid hsla(0, 0%, 94%, 1);
+	margin:			0;
+	padding:		0.25em 0.5em;
+	border-radius:	0.15em;
+	background:		hsla(0, 0%, 96%, 1);
+	box-shadow:		1px 1px 3px hsla(0, 0%, 0%, 0.2);
+	border-top:		1px solid hsla(0, 0%, 98%, 1);
+	border-left:	4px solid hsla(0, 0%, 98%, 1);
+	border-right:	1px solid hsla(0, 0%, 94%, 1);
+	border-bottom:	1px solid hsla(0, 0%, 94%, 1);
 
 }
 
+.profile .profile_title
+{
+	display: 		inline-block;
+	width:			80%;
+	overflow: 		hidden;
+}
+
+.profile .profile_unread
+{
+	display: 		inline-block;
+	background:		hsla(0, 0%, 96%, .3);
+	width:			20%;
+	font-style: 	0.8em;
+	float:			right;
+	background:		hsla(0, 0%, 16%, 1);
+	color:			hsla(0, 0%, 100%, 1);
+	padding:		0.2em 0.5em;
+	box-shadow:		1px 1px 3px hsla(0, 0%, 0%, 0.2);
+	border-top:		1px solid hsla(0, 0%, 98%, 1);
+	border-left:	4px solid hsla(0, 0%, 98%, 1);
+	border-right:	1px solid hsla(0, 0%, 94%, 1);
+	border-bottom:	1px solid hsla(0, 0%, 94%, 1);
+
+}
 
 .profile:hover
 {

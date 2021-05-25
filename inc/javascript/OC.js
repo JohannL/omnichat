@@ -9,6 +9,7 @@ function Omnichat()
 Omnichat.prototype.init = function()
 {
 	this.chat_logs = {};
+	this.unread_counts = {};
 	this.profile_id = 0;
 	this.profile_key = null;
 	this.peer = null;
@@ -87,7 +88,6 @@ Omnichat.prototype.init_host = function(profile_key)
 	this.host = new Omnichat_Host(profile_key);
 }
 
-
 Omnichat.prototype.send_chat = function()
 {
 	if (this.selected_peer == null || this.host.peers[this.selected_peer] == undefined)
@@ -97,7 +97,7 @@ Omnichat.prototype.send_chat = function()
 	el_input = document.getElementById('chat_input');
 	let peer = this.host.peers[this.selected_peer];
 	let connection = this.host.connections[this.selected_peer];
-	console.log('sending chat', el_input.value, this.selected_peer);
+	// console.log('sending chat', el_input.value, this.selected_peer);
 	peer.connection.send({
 		chat: el_input.value,
 	});
@@ -106,14 +106,25 @@ Omnichat.prototype.send_chat = function()
 
 Omnichat.prototype.add_to_chatlog = function(peer_key, chat)
 {
+	if (this.unread_counts[peer_key] == undefined)
+	{
+		this.unread_counts[peer_key] = [];
+	}
+	if (this.selected_peer != peer_key)
+	{
+		this.unread_counts[peer_key]++;
+		let el_profile_unread = document.getElementById('profile_unread_' + peer_key);
+		el_profile_unread.innerHTML = this.unread_counts[peer_key];
+	}
+
 	if (this.chat_logs[peer_key] == undefined)
 	{
-		console.log(`add_to_chatlog this.chat_logs[${peer_key}] == undefined`);
+		// console.log(`add_to_chatlog this.chat_logs[${peer_key}] == undefined`);
 		this.chat_logs[peer_key] = [];
 	}
-	console.log(this.chat_logs, peer_key);
+	// console.log(this.chat_logs, peer_key);
 	let
-		formatted_chat = '<div class=entry><b>'+peer_key+'</b>: '+chat+'</div>';
+		formatted_chat = '<div class=entry>'+chat+'</div>';
 	this.chat_logs[peer_key] += formatted_chat;
 	if (this.selected_peer === peer_key)
 	{
@@ -142,15 +153,21 @@ Omnichat.prototype.clear_chat = function()
 
 Omnichat.prototype.refresh_chat = function(peer_key)
 {
-	console.log(`refresh_chat ${peer_key} ${this.chat_logs[peer_key]}`);
+	// console.log(`refresh_chat ${peer_key} ${this.chat_logs[peer_key]}`);
+
+	this.unread_counts[peer_key] = 0;
+	let el_profile_unread = document.getElementById('profile_unread_' + peer_key);
+	el_profile_unread.innerHTML = '&nbsp;';
+
 	this.chat_log = this.chat_logs[peer_key];
 	this.el_chat_log.innerHTML = this.chat_logs[peer_key];
-	console.log(this.chat_logs[peer_key]);
+	// console.log(this.chat_logs[peer_key]);
 }
 
 Omnichat.prototype.select_profile = function(peer_key)
 {
-	console.log(`selecting profile ${peer_key}`);
+	// console.log(`selecting profile ${peer_key}`);
+	// hmmpf
 	this.host.add_peer(peer_key);
 	if (this.selected_peer)
 	{
@@ -169,7 +186,7 @@ Omnichat.prototype.select_profile = function(peer_key)
 	}
 	if (this.chat_logs[peer_key] == undefined)
 	{
-		console.log(`this.chat_logs[${peer_key}] == undefined`);
+		// console.log(`this.chat_logs[${peer_key}] == undefined`);
 		this.chat_logs[peer_key] = [];
 	}
 	this.selected_peer = peer_key;
