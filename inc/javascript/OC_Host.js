@@ -20,26 +20,26 @@ Omnichat_Host.prototype.receive_data = function(peer_key, data)
 Omnichat_Host.prototype.init = function()
 {
 	this.peer = new Peer(this.key);
-	console.log(`Host {${this.key}}`);
+	// console.log(`Host {${this.key}}`);
 	// on incoming connection
 	var that = this;
 
 	this.peer.on('connection', function(connection) {
-		console.log(`Incoming connection from {${connection.peer}}`);
+		// console.log(`Incoming connection from {${connection.peer}}`);
 		that.add_peer(connection.peer);
 		that.connections[connection.peer] = connection;
 		connection.on('open', function() {
-			console.log(`Connection opened from {${connection.peer}}`);
+			// console.log(`Connection opened from {${connection.peer}}`);
 			// receive data
 			connection.on('data', function(data) {
-				console.log('Received data from ' + connection.peer, data);
+				// console.log('Received data from ' + connection.peer, data);
 				that.receive_data(connection.peer, data);
 			});
 		});
 	});
 
 	// mark own profile in list
-	console.log('profile_' + this.key);
+	// console.log('profile_' + this.key);
 	// only exists after the page refreshed once, so don't assume
 	let el_profile = document.getElementById('profile_' + this.key);
 	if (el_profile)
