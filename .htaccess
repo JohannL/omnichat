@@ -2,7 +2,6 @@ ErrorDocument 404 "<html><head><title>404</title></head><body style='background-
 
 ServerSignature	Off
 
-
 Options -MultiViews -Indexes
 
 RewriteEngine on

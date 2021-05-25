@@ -44,7 +44,7 @@ Omnichat.prototype.init_main = function()
 		// create a new, hopefully unique ID
 		let a_random_id = rand_id() + rand_id() + rand_id() + rand_id() + rand_id() + rand_id() + rand_id() + rand_id();
 		// create new profile in the DB and receive the profile ID
-		ajax('http://127.0.0.1/omnichat/index.php/_request_profile_id/', 'key=' + a_random_id, function(readyState, status, responseText, data)
+		ajax(window.location + '_request_profile_id/', 'key=' + a_random_id, function(readyState, status, responseText, data)
 		{
 			if (readyState == 4)
 			{
@@ -58,7 +58,7 @@ Omnichat.prototype.init_main = function()
 					store.setItem('OC_profile_id', OC.profile_id);
 					// reload page to show up in the list
 					window.location.reload(true);
-					OC.init_peer(this.profile_key);
+					OC.init_host(this.profile_key);
 				}
 				else
 				{
@@ -140,6 +140,7 @@ Omnichat.prototype.refresh_chat = function(peer_key)
 	console.log(`refresh_chat ${peer_key} ${this.chat_logs[peer_key]}`);
 	this.chat_log = this.chat_logs[peer_key];
 	this.el_chat_log.innerHTML = this.chat_logs[peer_key];
+	console.log(this.chat_logs[peer_key]);
 }
 
 Omnichat.prototype.select_profile = function(peer_key)
